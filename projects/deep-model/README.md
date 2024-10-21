@@ -1,7 +1,7 @@
-# DeepModal
+# DeepModel
 
 ## What
-- DeepModal is deeply integrated with Angular's reactivity system and extends the functionality of Angular Signals, allowing for more efficient and intuitive management of reactive data.
+- DeepModel is deeply integrated with Angular's reactivity system and extends the functionality of Angular Signals, allowing for more efficient and intuitive management of reactive data.
 - It leverages Signals to enhance the reactive capabilities, while using a Proxy to monitor property access and updates, supporting nested objects and arrays.
 - This ensures seamless reactivity even when dealing with complex data structures.
 
@@ -17,7 +17,7 @@
 - To use this command, you need to first add a package that implements end-to-end testing capabilities.
 
 ## 説明
-- DeepModalは、AngularのリアクティブシステムおよびSignalを拡張し、深く統合されています。
+- DeepModelは、AngularのリアクティブシステムおよびSignalを拡張し、深く統合されています。
 - Signalの機能を活用することで、より効率的かつ直感的にリアクティブなデータの管理が可能です。
 - また、プロパティのアクセスや更新を監視するためにProxyを使用して、ネストされたオブジェクトや配列をサポートしています。
 - これにより、複雑なデータ構造を扱う際にもシームレスなリアクティビティが実現されます。
