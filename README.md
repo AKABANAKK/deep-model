@@ -1,27 +1,27 @@
 # DeepModal
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.9.
-
-## Development server
-
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## What
+DeepModal is deeply integrated with Angular's reactivity system and extends the functionality of Angular Signals, allowing for more efficient and intuitive management of reactive data. It leverages Signals to enhance the reactive capabilities, while using a Proxy to monitor property access and updates, supporting nested objects and arrays. This ensures seamless reactivity even when dealing with complex data structures.
 
 ## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+- Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
 ## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+- Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
 ## Running end-to-end tests
+- Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## 説明
+- DeepModalは、AngularのリアクティブシステムおよびSignalを拡張し、深く統合されています。Signalの機能を活用することで、より効率的かつ直感的にリアクティブなデータの管理が可能です。また、プロパティのアクセスや更新を監視するためにProxyを使用して、ネストされたオブジェクトや配列をサポートしています。これにより、複雑なデータ構造を扱う際にもシームレスなリアクティビティが実現されます。
 
-## Further help
+## ビルド
+- ng build を実行してプロジェクトをビルドします。ビルド成果物は dist/ ディレクトリに保存されます。
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## 単体テストの実行
+- ng test を実行して、Karma を通じて単体テストを実行します。
+
+## エンドツーエンドテストの実行
+- ng e2e を実行して、お好みのプラットフォームを使用してエンドツーエンドテストを実行します。
+- このコマンドを使用するには、まずエンドツーエンドテスト機能を実装するパッケージを追加する必要があります。
+
