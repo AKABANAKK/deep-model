@@ -18,18 +18,6 @@ export class DeepModelTest {
     readonly userProfile = deepModel(DefaultUserProfile);
 
     constructor() {
-        effect(() => {
-            this.userProfile();
-        });
-        effect(() => {
-            this.userProfile.name();
-        });
-        effect(() => {
-            this.userProfile.address();
-        });
-        effect(() => {
-            this.userProfile.address.street();
-        });
     }
 
     add_tag() {

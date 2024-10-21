@@ -7,6 +7,7 @@ describe('DeepSignal with toDeepSignal', () => {
     beforeEach(() => {
         userProfileSignal = deepModel(DefaultUserProfile);
     });
+
     it('should get and set the entire UserProfile object', () => {
         expect(userProfileSignal()).toEqual(DefaultUserProfile);
         userProfileSignal.set({
@@ -43,6 +44,7 @@ describe('DeepSignal with toDeepSignal', () => {
             city: 'Nagoya',
         });
     });
+
     it('should get and set nested address properties', () => {
         expect(userProfileSignal.address.street()).toBe('Sakura Street');
         userProfileSignal.address.street.set('Cherry Street');

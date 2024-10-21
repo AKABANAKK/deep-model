@@ -1,5 +1,3 @@
-import {DeepModel, deepModel} from '../lib/deep-model';
-
 export interface Tag {
     name: string | null;
 }

@@ -91,7 +91,6 @@ class DeepModelHandler<T> implements ProxyHandler<DeepModel<T>> {
                     } else {
                         array[i] = signalObj();
                     }
-                    console.info(array[i], signalValue);
                 }
             }
             return array as T;
@@ -114,20 +113,18 @@ class DeepModelHandler<T> implements ProxyHandler<DeepModel<T>> {
 
     private deepEquals(obj1: any, obj2: any): boolean {
         if (obj1 === obj2) {
-            return true; // 同じオブジェクトや値の場合はtrue
+            return true;
         }
 
         if (typeof obj1 !== "object" || typeof obj2 !== "object" || obj1 === null || obj2 === null) {
-            return false; // どちらかがオブジェクトでないか、nullの場合はfalse
+            return false;
         }
 
-        // 配列かどうかをチェック
         if (Array.isArray(obj1) && Array.isArray(obj2)) {
             if (obj1.length !== obj2.length) {
-                return false; // 配列の長さが異なる場合はfalse
+                return false;
             }
 
-            // 配列の要素を再帰的に比較
             for (let i = 0; i < obj1.length; i++) {
                 if (!this.deepEquals(obj1[i], obj2[i])) {
                     return false;
@@ -135,20 +132,19 @@ class DeepModelHandler<T> implements ProxyHandler<DeepModel<T>> {
             }
             return true;
         } else if (Array.isArray(obj1) || Array.isArray(obj2)) {
-            return false; // 一方が配列で他方がオブジェクトの場合はfalse
+            return false;
         }
 
-        // オブジェクトのプロパティを比較
         const keys1 = Object.keys(obj1);
         const keys2 = Object.keys(obj2);
 
         if (keys1.length !== keys2.length) {
-            return false; // プロパティの数が異なる場合はfalse
+            return false;
         }
 
         for (const key of keys1) {
             if (!keys2.includes(key) || !this.deepEquals(obj1[key], obj2[key])) {
-                return false; // キーが存在しない、または値が一致しない場合
+                return false;
             }
         }
 
