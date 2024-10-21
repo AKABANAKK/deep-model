@@ -1,0 +1,11 @@
+<input id="nameInput" [(ngModel)]="userProfile.name" />
+<input id="cityInput" [(ngModel)]="userProfile.address.city" />
+<input id="streetInput" [(ngModel)]="userProfile.address.street" />
+<ng-container *ngFor="let tag of userProfile.tags(); let idx = index">
+    <input
+        [id]="'tags' + idx + 'Input'"
+        [(ngModel)]="userProfile.tags[idx]"
+    />
+    <br />
+</ng-container>
+<button id="tagAddButton" (click)="add_tag()">add tag</button>
