@@ -1,4 +1,4 @@
-import {IsArrayNullable, IsKnownRecordNullable, IsPrimitiveNullable} from "./type-utils";
+import {IsArrayNullable, IsKnownRecordNullable, IsPrimitiveNullable} from './type-utils';
 import {Signal, WritableSignal} from '@angular/core';
 
 export type DeepModel<T> = IsPrimitiveNullable<T> extends true
