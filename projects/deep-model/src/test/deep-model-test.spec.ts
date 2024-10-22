@@ -54,6 +54,6 @@ describe('DeepModelTest', () => {
         button.dispatchEvent(new Event('click'));
         fixture.detectChanges();
 
-        expect(test.userProfile.tags()).toEqual([TagManager, {name: "test2"}, {name: "test3"}]);
+        expect(test.userProfile.tags()).toEqual([TagManager, {name: 'test2'}, {name: 'test3'}]);
     });
 });

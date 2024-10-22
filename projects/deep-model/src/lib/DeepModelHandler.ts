@@ -6,52 +6,54 @@ export class DeepModelHandler<T> implements ProxyHandler<DeepModel<T>> {
 
     private readonly _modelSignal: WritableSignal<T>;
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     private readonly _cache: Partial<Record<keyof T | number, DeepModel<any> | WritableSignal<any>>> = {};
 
     constructor(private model: T) {
-        this._modelSignal = signal<T>(this.model);
+        this._modelSignal = signal<T>(model);
     }
 
-    apply(target: DeepModel<T>, thisArg: any, argArray: any[]): T {
-        let result: any = this.createModelValue(this._modelSignal());
-        return result as T;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    apply(_target: DeepModel<T>, _thisArg: any, _argArray: any[]): T {
+        return this.createModelValue(this._modelSignal()) as T;
     }
 
-    get(target: DeepModel<T>, prop: string | symbol, receiver: any) {
-        if ((typeof prop) != "string") {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    get(_target: DeepModel<T>, prop: string | symbol, _receiver: any) {
+        if ((typeof prop) !== 'string') {
             return null;
         }
         let propStr = prop as string;
         {
-            if (propStr.toLowerCase() == "tostring") {
+            if (propStr.toLowerCase() === 'tostring') {
                 return JSON.stringify(this._modelSignal());
             }
-            if (propStr.toLowerCase() == "set") {
+            if (propStr.toLowerCase() === 'set') {
                 return (value: T) => {
                     this.clearCache();
                     this._modelSignal.set(value);
                 };
             }
-            if (propStr.toLowerCase() == "update") {
-                return (updateFn: (value: T) => T) => {
+            if (propStr.toLowerCase() === 'update') {
+                return (updateFn: (_value: T) => T) => {
                     this.clearCache();
                     this._modelSignal.update(updateFn);
                 };
             }
-            if (propStr.toLowerCase() == "asReadonly") {
+            if (propStr.toLowerCase() === 'asReadonly') {
                 return this._modelSignal.asReadonly.bind(this._modelSignal);
             }
         }
         const key = propStr as keyof T;
         const model = this._modelSignal();
         if (!Object.hasOwnProperty.apply(model, [key])) {
-            throw Error("property not found: " + propStr);
+            throw Error('property not found: ' + propStr);
         }
         if (key in this._cache) {
             return this._cache[key];
         }
         const value = model[key];
-        if (typeof value == 'object') {
+        if (typeof value === 'object') {
             let deepSignalObj = deepModel(value);
             this._cache[key] = deepSignalObj;
             return deepSignalObj;
@@ -69,15 +71,17 @@ export class DeepModelHandler<T> implements ProxyHandler<DeepModel<T>> {
         }
     }
 
-    private createModelValue(currentModel: T): any {
+
+    private createModelValue(currentModel: T): T {
         if (Array.isArray(currentModel)) {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const array: any[] = currentModel as [];
             for (let i = 0; i < array.length; i++) {
                 const signalObj = this._cache[i];
                 if (signalObj) {
                     const signalValue = signalObj();
                     const arrayValue = array[i];
-                    if (typeof signalValue == 'object') {
+                    if (typeof signalValue === 'object') {
                         if (!this.deepEquals(signalValue, arrayValue)) {
                             array[i] = signalValue;
                         }
@@ -104,12 +108,13 @@ export class DeepModelHandler<T> implements ProxyHandler<DeepModel<T>> {
         }
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     private deepEquals(obj1: any, obj2: any): boolean {
         if (obj1 === obj2) {
             return true;
         }
 
-        if (typeof obj1 !== "object" || typeof obj2 !== "object" || obj1 === null || obj2 === null) {
+        if (typeof obj1 !== 'object' || typeof obj2 !== 'object' || obj1 === null || obj2 === null) {
             return false;
         }
 

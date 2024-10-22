@@ -1,5 +1,6 @@
-import {DeepModel, deepModel} from '../lib/deep-model';
+import {deepModel} from '../lib/deep-model';
 import {DefaultUserProfile, TagManager, TagNormal, UserProfile} from './data.spec';
+import {DeepModel} from '../lib/types';
 
 describe('DeepSignal with toDeepSignal', () => {
     let userProfileSignal: DeepModel<UserProfile>;
@@ -17,7 +18,7 @@ describe('DeepSignal with toDeepSignal', () => {
                 city: 'Kyoto',
             },
             tags: [TagNormal],
-            keywords: ["keyword2"]
+            keywords: ['keyword2']
         });
         expect(userProfileSignal()).toEqual({
             name: 'Jiro',
@@ -26,7 +27,7 @@ describe('DeepSignal with toDeepSignal', () => {
                 city: 'Kyoto',
             },
             tags: [TagNormal],
-            keywords: ["keyword2"]
+            keywords: ['keyword2']
         });
     });
 
