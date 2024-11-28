@@ -1,6 +1,6 @@
 {
     "name": "deep-model",
-    "version": "0.0.9",
+    "version": "0.0.10",
     "scripts": {
         "ng": "ng",
         "start": "ng serve",
@@ -9,7 +9,7 @@
         "test": "ng test",
         "publish": "npm publish --access public"
     },
-    "private": true,
+    "private": false,
     "dependencies": {
         "@angular/animations": "^18.2.0",
         "@angular/common": "^18.2.0",
