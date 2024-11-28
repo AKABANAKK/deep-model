@@ -1,59 +1,61 @@
-import {TestBed} from '@angular/core/testing';
-import {DeepModelTest} from './deep-model-test';
-import {TagManager} from './data.spec';
+import {deepModel} from '../lib/deep-model';
+import {DefaultUserProfile, TagManager, TagNormal, UserProfile} from './deep-model-test-data';
+import {DeepModel} from '../lib/types';
 
-describe('DeepModelTest', () => {
-    beforeEach(async () => {
-        await TestBed.configureTestingModule({
-            imports: [DeepModelTest],
-        }).compileComponents();
+describe('deep-model-test', () => {
+    let userProfileSignal: DeepModel<UserProfile>;
+
+    beforeEach(() => {
+        userProfileSignal = deepModel(DefaultUserProfile);
     });
 
-    it('should create the test', () => {
-        const fixture = TestBed.createComponent(DeepModelTest);
-        const test = fixture.componentInstance;
-        expect(test).toBeTruthy();
+    it('should get and set the entire UserProfile object', () => {
+        expect(userProfileSignal()).toEqual(DefaultUserProfile);
+        userProfileSignal.set({
+            name: 'Jiro',
+            address: {
+                street: 'Maple Street',
+                city: 'Kyoto',
+            },
+            tags: [TagNormal],
+            keywords: ['keyword2']
+        });
+        expect(userProfileSignal()).toEqual({
+            name: 'Jiro',
+            address: {
+                street: 'Maple Street',
+                city: 'Kyoto',
+            },
+            tags: [TagNormal],
+            keywords: ['keyword2']
+        });
     });
 
-    it('should update the property when name input changes', () => {
-        const fixture = TestBed.createComponent(DeepModelTest);
-        fixture.detectChanges();
-
-        const inputElement: HTMLInputElement = fixture.nativeElement.querySelector('#nameInput');
-        const test = fixture.componentInstance;
-
-        inputElement.value = 'Kenji';
-        inputElement.dispatchEvent(new Event('input'));
-        fixture.detectChanges();
-
-        expect(test.userProfile().name).toBe('Kenji');
+    it('should get and set the address property', () => {
+        expect(userProfileSignal.address()).toEqual({
+            street: 'Sakura Street',
+            city: 'Tokyo',
+        });
+        userProfileSignal.address.set({
+            street: 'Pine Street',
+            city: 'Nagoya',
+        });
+        expect(userProfileSignal.address()).toEqual({
+            street: 'Pine Street',
+            city: 'Nagoya',
+        });
     });
 
-    it('should update the property when street input changes', () => {
-        const fixture = TestBed.createComponent(DeepModelTest);
-        fixture.detectChanges();
-
-        const inputElement: HTMLInputElement = fixture.nativeElement.querySelector('#streetInput');
-        const test = fixture.componentInstance;
-
-        inputElement.value = 'Meiji';
-        inputElement.dispatchEvent(new Event('input'));
-        fixture.detectChanges();
-
-        expect(test.userProfile.address.street()).toBe('Meiji');
+    it('should get and set nested address properties', () => {
+        expect(userProfileSignal.address.street()).toBe('Sakura Street');
+        userProfileSignal.address.street.set('Cherry Street');
+        expect(userProfileSignal.address.street()).toBe('Cherry Street');
     });
 
-    it('should update the property when tag input changes', () => {
-        const fixture = TestBed.createComponent(DeepModelTest);
-        fixture.detectChanges();
-
-        const button: HTMLButtonElement = fixture.nativeElement.querySelector('#tagAddButton');
-        const test = fixture.componentInstance;
-
-        button.dispatchEvent(new Event('click'));
-        button.dispatchEvent(new Event('click'));
-        fixture.detectChanges();
-
-        expect(test.userProfile.tags()).toEqual([TagManager, {name: 'test2'}, {name: 'test3'}]);
+    it('should get and set the tags property', () => {
+        expect(userProfileSignal.tags()).toEqual([TagManager]);
+        userProfileSignal.tags.set([TagNormal]);
+        expect(userProfileSignal.tags()).toEqual([TagNormal]);
     });
 });
+

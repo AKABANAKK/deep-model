@@ -1,19 +1,18 @@
 import {ChangeDetectionStrategy, Component} from '@angular/core';
-import {RouterOutlet} from '@angular/router';
-import {DefaultUserProfile, Tag} from './data.spec';
+import {DefaultUserProfile, Tag} from './deep-model-test-data';
 import {FormsModule} from '@angular/forms';
 import {CommonModule} from '@angular/common';
 import {deepModel} from '../lib/deep-model';
 
 @Component({
-    selector: 'deep-model-test',
+    selector: 'deep-model-component-test',
     standalone: true,
-    imports: [RouterOutlet, FormsModule, CommonModule],
-    templateUrl: './deep-model-test.html',
+    imports: [FormsModule, CommonModule],
+    templateUrl: './deep-model-component-test.html',
     styles: [],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DeepModelTest {
+export class DeepModelComponentTest {
 
     readonly userProfile = deepModel(DefaultUserProfile);
 
